@@ -1,13 +1,6 @@
 import Head from "next/head";
 
-export const getStaticPaths = async () => {
-  return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: "blocking", //indicates the type of fallback
-  };
-};
-
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const { address } = context.params;
 
   const response = await fetch(
