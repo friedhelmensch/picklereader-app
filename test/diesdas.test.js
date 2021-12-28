@@ -1,5 +1,32 @@
-test("true is not false", () => {
-  expect(true).toBe(false);
+const amount = require("../lib/heinz");
+
+test("amount of ", () => {
+  const input = [
+    {
+      amount: 11,
+      date: "2021-11-22T19:39:33.632694+00:00",
+    },
+    {
+      amount: 9,
+      date: "2021-11-23T01:23:06.492403+00:00",
+    },
+    {
+      amount: 7,
+      date: "2021-11-23T01:22:06.492403+00:00",
+    },
+    {
+      amount: 13,
+      date: "2021-11-24T08:33:11.703134+00:00",
+    },
+  ];
+
+  const result = amount(
+    input,
+    new Date("November 23, 2021 00:00:00"),
+    new Date("November 24, 2021 00:00:00")
+  );
+
+  expect(result).toBe(2);
 });
 
 const input = [
@@ -87,7 +114,10 @@ const input = [
     amount: 14456.7760551805,
     date: "2021-11-24T10:31:21.974058+00:00",
   },
-  { amount: 14457.564331616, date: "2021-11-24T12:45:42.028456+00:00" },
+  {
+    amount: 14457.564331616,
+    date: "2021-11-24T12:45:42.028456+00:00",
+  },
   {
     amount: 14457.7386612422,
     date: "2021-11-24T14:26:09.532796+00:00",

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import amount from "../../lib/heinz";
 
 export async function getServerSideProps(context) {
   const { address } = context.params;
@@ -25,9 +26,31 @@ export async function getServerSideProps(context) {
     };
   });
 
+  const today = new Date(Date.now());
+  today.setHours(0, 0, 0, 0);
+
+  const tomorrow = new Date(Date.now());
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const amountOfToday = amount(rawData, today, tomorrow);
+
+  const yesterday = new Date(Date.now());
+  yesterday.setDate(yesterday.getDate() - 1);
+  yesterday.setHours(0, 0, 0, 0);
+
+  console.log(yesterday);
+  console.log(today);
+
+  const amountOfYesterday = amount(rawData, yesterday, today);
+
+  const totalBalance = data.length > 0 ? data[0].amount : 0;
+
   return {
     props: {
       history: data,
+      today: Math.round(amountOfToday * 100) / 100,
+      yesterday: Math.round(amountOfYesterday * 100) / 100,
+      totalBalance,
     },
   };
 }
@@ -50,19 +73,19 @@ export default function Home(props) {
         <div className="grid">
           <div className="card">
             <h3>Today</h3>
-            <p>1 DAI (not)</p>
+            <p>{props.today} DAI</p>
           </div>
           <div className="card">
             <h3>Yesterday</h3>
-            <p>2 DAI (working)</p>
+            <p>{props.yesterday} DAI</p>
           </div>
           <div className="card">
             <h3>Last Week</h3>
-            <p> 9 DAI (yet)</p>
+            <p>(tbd)</p>
           </div>
           <div className="card">
-            <h3>Total</h3>
-            <p> 35 DAI (but soon)</p>
+            <h3>Balance</h3>
+            <p>{props.totalBalance} DAI</p>
           </div>
         </div>
       </main>
