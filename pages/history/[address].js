@@ -47,6 +47,24 @@ export default function Home(props) {
 
       <main>
         <h1 className="title">Look at your beautiful history</h1>
+        <div className="grid">
+          <div className="card">
+            <h3>Today</h3>
+            <p>1 DAI (not)</p>
+          </div>
+          <div className="card">
+            <h3>Yesterday</h3>
+            <p>2 DAI (working)</p>
+          </div>
+          <div className="card">
+            <h3>Last Week</h3>
+            <p> 9 DAI (yet)</p>
+          </div>
+          <div className="card">
+            <h3>Total</h3>
+            <p> 35 DAI (but soon)</p>
+          </div>
+        </div>
       </main>
       <table>
         <thead>
